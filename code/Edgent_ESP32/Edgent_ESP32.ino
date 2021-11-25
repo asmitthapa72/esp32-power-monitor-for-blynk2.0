@@ -1,5 +1,8 @@
-#define BLYNK_TEMPLATE_ID "TMPL0ToNrvn7"
-#define BLYNK_DEVICE_NAME "meterC"
+
+// Fill-in information from your Blynk Template here
+//#define BLYNK_TEMPLATE_ID           "TMPLxxxxxx"
+//#define BLYNK_DEVICE_NAME           "Device"
+
 
 #define BLYNK_FIRMWARE_VERSION        "0.1.0"
 
@@ -12,8 +15,8 @@
 #include "BlynkEdgent.h"
 
 EnergyMonitor emon;
-#define vCalibration 85
-#define currCalibration 35
+#define vCalibration 85 // (change the valu as per your need to get proper output)
+#define currCalibration 35 // (change the valu as per your need toget proper output)
 
 BlynkTimer timer;
 
@@ -22,7 +25,6 @@ unsigned long lastmillis = millis();
 
 void myTimerEvent() {
      emon.calcVI(20, 2000);
-    Serial.begin(3000);
     Serial.print("Vrms: ");
     Serial.print(emon.Vrms, 2);
     Serial.print("V");
@@ -51,7 +53,7 @@ void setup()
   BlynkEdgent.begin();
   emon.voltage(35, vCalibration, 1.7); // Voltage: input pin, calibration, phase_shift
   emon.current(34, currCalibration); // Current: input pin, calibration.
-  timer.setInterval(5L, myTimerEvent);
+  timer.setInterval(5000L, myTimerEvent);
  
 
 }
